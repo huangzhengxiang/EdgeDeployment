@@ -10,7 +10,9 @@ MCU_PLUS_SDK_AM243X User Guide
 0. MCU-PLUS-SDK-AM243X
 	https://www.ti.com.cn/tool/cn/download/MCU-PLUS-SDK-AM243X
 	https://www.ti.com.cn/tool/cn/download/MCU-PLUS-SDK-AM243X/08.04.00.17
+	https://www.ti.com/tool/download/MCU-PLUS-SDK-AM243X/09.00.00.35
 1. SysConfig 1.17 C://ti
+	https://software-dl.ti.com/ccs/esd/sysconfig/sysconfig-1.17.0_3128-setup.exe
 2. python3
 3. openssl-1.1.1 
 	https://slproweb.com/products/Win32OpenSSL.html
@@ -30,13 +32,32 @@ MCU_PLUS_SDK_AM243X User Guide
 	CCS > Window > Preferences > Code Composer Studio > Products
 	![products discovery path](TI/package-path.png)
 
-### 2.3 Board Setup
+### 2.3 Board Flash Boot Setup
 1. set the board to be uart boot mode.
 ![UART Board Configuration](TI/uart-boot.png)
 
 2. run the following script:
-C:\ti\mcu_plus_sdk_am243x_08_04_00_17 is the location of installed sdk. COM4 is the corresponding serial port.
+C:\ti\mcu_plus_sdk_am243x_09_00_00_35 is the location of installed sdk. (Earlier Version has bugs). COM4 is the corresponding serial port.
 ```
-cd C:\ti\mcu_plus_sdk_am243x_08_04_00_17\tools\boot
+cd C:\ti\mcu_plus_sdk_am243x_09_00_00_35\tools\boot
 python uart_uniflash.py -p COM4 --cfg=sbl_prebuilt/am243x-lp/default_sbl_null.cfg
 ```
+
+3. Til now, the program can be run under OSPI boot mode.
+![OSPI boot](TI/OSPI.png)
+
+### 2.4 Launch and Run
+1. set target config and launch it. 
+(in {soc name}_{JTAG type}.ccxml)
+We use `XDS110 USB Debug Probe` and `AM243x_LAUNCHPAD`.
+
+2. connect the deivce and <b>reset CPU</b>.
+
+3. Load program and run!
+
+4. serial port monitoring
+baud rate: 115200
+data size: 8-bits
+parity: None
+stop bits: 1
+encoding: ISO-8859-1
