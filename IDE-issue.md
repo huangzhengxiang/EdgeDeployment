@@ -50,10 +50,13 @@ python uart_uniflash.py -p COM4 --cfg=sbl_prebuilt/am243x-lp/default_sbl_null.cf
 1. set target config and launch it. 
 (in {soc name}_{JTAG type}.ccxml)
 We use `XDS110 USB Debug Probe` and `AM243x_LAUNCHPAD`.
+（If the `Target Configurations` View is closed, open it in `Show View` in `Window`.）
 
 2. connect the deivce and <b>reset CPU</b>.
+![CPU reset](TI/reset.png){width=80%}
 
 3. Load program and run!
+![Load](TI/load.png){width=60%}
 
 4. serial port monitoring
 baud rate: 115200
