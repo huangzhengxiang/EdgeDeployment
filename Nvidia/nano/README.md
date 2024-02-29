@@ -1,4 +1,16 @@
 # nano
+Official Guideline:
+https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
+Jetson Nano User Manual:
+https://developer.nvidia.com/embedded/learn/jetson-nano-2gb-devkit-user-guide
+Hardware Parameters:
+![hardware-param](hardware-param.png)
+Circuit Diagram
+![circuit](circuit.png)
+
+ZhiHu Column:
+https://zhuanlan.zhihu.com/p/632057827
+
 
 ## 0. System Setup
 ### 0.1 SD card overwrite
@@ -6,4 +18,184 @@ You need balenaEtcher to write system image to SD card.
 https://etcher.balena.io/#download-etcher
 You shall create image following instructions on nano website or use pre-set image from disk.
 
-### 0.2 First Boot
+### 0.2 Boot amd Control
+#### 0.2.1 serial boot (headless mode, no monitor)
+Wiring Instructions, 2 alternatives.
+- Micro-USB Power Supplied (Remove the J48 Power Select Header pins jumper): Connect micro-USB to PC's USB port with power supply; no additional power input in need.
+- DC 5V-3A Power Supplied (Jumper the J48 Power Select Header pins): Connect to PC's USB port with/without power supply; additionally connect DC wire to 5V power jack.
+
+Serial Communication.
+https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup
+- For Windows.
+    1. Locate device COM port in `Device Manager`.
+    2. Write down the COM number. ![COM](COM.png)
+    3. Download and execute `Putty`.
+    https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+    4. enter COM number and baud rate into the blanket and open.
+    ![Putty](putty.png)
+    5. Finally, log in.
+- For MACOS (Linux).
+    1. Before connecting to your Jetson developer kit for initial setup, check to see what Serial devices are already shown on your macOS computer.
+    ```bash
+    ls /dev/cu.usbmodem*
+    ```
+    The new device is your nano.
+    2. screen operation.
+    ```bash
+    sudo screen /dev/cu.usbmodem14133200001053 115200
+    ```
+#### 0.2.2 Monitor Mode
+Connect your nano to a monitor and control it as if you are controling an ordinary computer.
+
+#### 0.2.3 ssh remote connection
+1. Make sure your PC are in the same intra-net as your nano, i.e., using the same router/WIFI (attention: large wifi with layer-3 switches are not acceptable).
+2. On your nano, check `ifconfig`. And you can see nano's IPv4 address. Replace "xxx.xxx.xxx.xxx" with IPv4 address.
+```bash
+ssh -p 22 nvidia@xxx.xxx.xxx.xxx
+```
+Also, scp is possible.
+```bash
+scp -P 22 file_name nvidia@xxx.xxx.xxx.xxx:/remote/directory
+```
+
+## 1. Networking
+We connect to WIFI with Network Manager CMI (Command Line Interface), which functions just the same as the GUI interface on the up-right corner of Ubuntu.
+```bash
+# see available wifi
+nmcli dev wifi list
+# connect to a wifi with WPA/WPA2 authentication
+sudo nmcli dev wifi con "WIFI-NAME" password "WIFI-PASSWORD"
+```
+
+Then, you can ping www.sjtu.edu.cn to see if networking is okay.
+```bash
+ping www.sjtu.edu.cn
+```
+Ctrl+C interrupt if response is detected.
+
+## 2. File System
+See the disk FS capacity with command `df -H`. If your SD card is 32GB, but only less than 16GB is shown, you need `parted` to enlarge your space to maximum possible.
+
+```bash
+# see capacity
+df -H
+sudo fdisk -l
+
+# repart the disk.
+sudo apt-get install parted
+sudo parted
+
+# in parted cli, resize dev/sda1 part.
+print
+select dev/sda
+resizepart
+# operate
+print
+
+# Now, fs not changed yet. resize2fs
+sudo resize2fs /dev/sda1
+df -H
+```
+
+Now, your system is ready to run.
+
+## 3. Fan & Cooling
+```bash
+sudo vim /etc/rc.local
+
+# write the following to the file. 
+#!/bin/bash
+sudo sh -c 'echo 100 > /sys/devices/pwm-fan/target_pwm'
+
+# change mode to executable
+sudo chmod 755 /etc/rc.local
+```
+
+## 4. Hello World in C
+Compile your first C program.
+1. directory
+```bash
+sudo apt-get install gcc g++ make cmake
+cd Desktop
+mkdir gkc2a
+cd gkc2a
+mkdir lesson1
+touch hi.c
+vim hi.c
+```
+
+2. coding
+Press i to activate `Insert` mode.
+```C
+#include <stdio.h>
+int main(){
+    printf("Hello Embedded World!\n");
+    return 0;
+}
+```
+`Esc` to back to normal mode.
+`:w` to save, `:q` to quit, `:wq` save and quit, `:q!` quit without save
+
+3. Compile and Run
+```bash
+gcc -o hi hi.c
+./hi
+```
+
+## 5. Hello Array in Python
+```bash
+# download dependencies
+sudo apt-get update
+sudo apt-get install python3-pip
+# now you have a system level python-3.6
+
+# add tsinghua mirror to pip
+sudo vim /etc/pip.config
+[global]
+index-url=https://pypi.tuna.tsinghua.edu.cn/simple
+
+# install packages
+pip3 install Cython==0.29.21 
+pip3 install numpy==1.19.5
+# it takes a long time, shall perform it after class.
+
+# see installed version
+pip3 freeze | grep numpy
+pip3 show numpy
+```
+
+Your first python program.
+```python
+import numpy as np
+
+arr = np.array(["Hello", "Embedded", "World!"])
+print(arr, " ".join(arr.tolist()), sep="\n")
+```
+
+## 6. Get Familiar With Resources
+Get familiar to Nano device resources.
+```bash
+# see memory and process
+sudo apt install htop
+sudo htop
+sudo ps -a
+sudo ps -e
+sudo ps -e | grep python3
+pstree
+# see disk resources
+df -H
+sudo fdisk -l
+```
+
+## 7. GitHub
+download git.
+```bash
+sudo apt install git
+```
+Vscode remote
+![remote-ssh](remote-vscode.png)
+
+## 8. PyTorch
+```bash
+sudo apt-get install libomp5 libomp-dev libopenmpi2 libopenblas-dev
+```
