@@ -220,7 +220,10 @@ git init
 touch README.md && echo "Hello Embedded World!\n" > README.md
 git add .
 git commit -m "initial commit"
-git 
+git branch -M main
+# create a repo
+git remote add origin https://github.com/account/repo.git
+git push origin main:main
 ```
 
 ## 8. PyTorch
