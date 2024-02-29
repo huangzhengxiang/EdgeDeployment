@@ -212,6 +212,17 @@ You shall change HostName every time you connect to network again. (see it thoug
 git clone https://github.com/huangzhengxiang/EdgeDeployment.git
 ```
 
+4. Try create a private repo and then push it to the cloud.
+```bash
+cd /home/nvidia/Desktop
+mkdir toy-repo && cd toy-repo
+git init
+touch README.md && echo "Hello Embedded World!\n" > README.md
+git add .
+git commit -m "initial commit"
+git 
+```
+
 ## 8. PyTorch
 ```bash
 sudo apt-get install libomp5 libomp-dev libopenmpi2 libopenblas-dev
