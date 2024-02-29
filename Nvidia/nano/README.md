@@ -73,6 +73,12 @@ ping www.sjtu.edu.cn
 ```
 Ctrl+C interrupt if response is detected.
 
+You can see your internet configurations via:
+```bash
+ifconfig
+iwconfig
+```
+
 ## 2. File System
 See the disk FS capacity with command `df -H`. If your SD card is 32GB, but only less than 16GB is shown, you need `parted` to enlarge your space to maximum possible.
 
@@ -157,7 +163,7 @@ index-url=https://pypi.tuna.tsinghua.edu.cn/simple
 # install packages
 pip3 install Cython==0.29.21 
 pip3 install numpy==1.19.5
-# it takes a long time, shall perform it after class.
+# it takes a long time (10 min), shall perform it after class.
 
 # see installed version
 pip3 freeze | grep numpy
@@ -188,12 +194,23 @@ sudo fdisk -l
 ```
 
 ## 7. GitHub
-download git.
+1. download git.
 ```bash
 sudo apt install git
 ```
-Vscode remote
+2. Vscode remote
 ![remote-ssh](remote-vscode.png)
+```
+Host Nano0xx
+    HostName 192.168.1.xxx
+    User nvidia
+```
+You shall change HostName every time you connect to network again. (see it though ifconfig on-board via serial/monitor).
+
+3. Try git clone a repository
+```bash
+git clone https://github.com/huangzhengxiang/EdgeDeployment.git
+```
 
 ## 8. PyTorch
 ```bash
