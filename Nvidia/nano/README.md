@@ -4,9 +4,12 @@ https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit
 Jetson Nano User Manual:
 https://developer.nvidia.com/embedded/learn/jetson-nano-2gb-devkit-user-guide
 Hardware Parameters:
-![hardware-param](hardware-param.png)
-Circuit Diagram
-![circuit](circuit.png)
+<div align="center">
+<img src="hardware-param.png" width="80%">
+</div>
+<div align="center">
+<img src="circuit.png" width="80%">
+</div>
 
 ZhiHu Column:
 https://zhuanlan.zhihu.com/p/632057827
@@ -28,11 +31,16 @@ Serial Communication.
 https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup
 - For Windows.
     1. Locate device COM port in `Device Manager`.
-    2. Write down the COM number. ![COM](COM.png)
+    2. Write down the COM number. 
+    <div align="center">
+    <img src="COM.png" width="70%">
+    </div>
     3. Download and execute `Putty`.
     https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
     4. enter COM number and baud rate into the blanket and open.
-    ![Putty](putty.png)
+    <div align="center">
+    <img src="putty.png" width="70%">
+    </div>
     5. Finally, log in.
 - For MACOS (Linux).
     1. Before connecting to your Jetson developer kit for initial setup, check to see what Serial devices are already shown on your macOS computer.
@@ -178,7 +186,7 @@ arr = np.array(["Hello", "Embedded", "World!"])
 print(arr, " ".join(arr.tolist()), sep="\n")
 ```
 
-## 6. Get Familiar With Resources
+## 6. Get Familiar With CPU & Disk Resources
 Get familiar to Nano device resources.
 ```bash
 # see memory and process
@@ -199,12 +207,17 @@ sudo fdisk -l
 sudo apt install git
 ```
 2. Vscode remote
-![remote-ssh](remote-vscode.png)
+You shall install the `Remote SSH` extension in vscode first.
+<div align="center">
+<img src="remote-vscode.png" width="50%">
+</div>
+
 ```
 Host Nano0xx
     HostName 192.168.1.xxx
     User nvidia
 ```
+
 You shall change HostName every time you connect to network again. (see it though ifconfig on-board via serial/monitor).
 
 3. Try git clone a repository
@@ -226,7 +239,62 @@ git remote add origin https://github.com/account/repo.git
 git push origin main:main
 ```
 
-## 8. PyTorch
+## 8. PyTorch Installation
+PyTorch for Jetson shall be downloaded from [PyTorch for Jetson](https://forums.developer.nvidia.com/t/pytorch-for-jetson/72048), the version number of `PyTorch v1.10.0`.
+(You may need an oversea VPN if you're in China.)
+
+Then, you send the file to nano via scp and install it on your nano. 
 ```bash
+scp -P 22 /path/on/your/pc/torch-1.10.0-cp36-cp36m-linux_aarch64.whl nvidia@192.168.xxx.xxx:/home/nvidia/Desktop
+# First, you install dependencies.
 sudo apt-get install libomp5 libomp-dev libopenmpi2 libopenblas-dev
+pip3 install torch-1.10.0-cp36-cp36m-linux_aarch64.whl
 ```
+
+Run the following code to see if torch is ready.
+```python
+import torch
+if __name__=="__main__":
+    if torch.cuda.is_available():
+        print("Hello! torch cuda is available!")
+```
+If torch is ready, you will see the following picture:
+<div align="center">
+<img src="torch.png" width="70%">
+</div>
+
+## 9. Torchvision & Opencv Installation
+```bash
+git clone --branch release/0.11  https://github.com/pytorch/vision torchvision
+# dependencies
+sudo apt-get install libjpeg-dev zlib1g-dev
+pip3 install 'pillow<9'
+# install
+cd torchvision/
+sudo python3 setup.py install
+```
+
+```bash
+pip3 install scikit-build
+pip3 install opencv-python
+```
+
+## 10. Nano Resources Monitoring
+You can also install nano specific resource monitor.
+First, append the following line of configuration into `~/.bashrc`
+```bash
+export TERM='xterm-256color'
+```
+
+Then, update jtop.
+```bash
+sudo -H pip3 install jetson-stats
+sudo systemctl restart jtop.service
+```
+
+Finally, initate jtop.
+```bash
+sudo jtop
+```
+
+You shall see CPU, Mem, and GPU usage of the process.
