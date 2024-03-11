@@ -156,7 +156,7 @@ sudo apt-get install python3-pip
 # now you have a system level python-3.6
 
 # add tsinghua mirror to pip
-sudo vim /etc/pip.config
+sudo vim /etc/pip.conf
 [global]
 index-url=https://pypi.tuna.tsinghua.edu.cn/simple
 
