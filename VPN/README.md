@@ -10,7 +10,7 @@ https://clashforwindows.org/clash-for-windows-download/
 ![proxy-2](proxy-setting-2.png)
 ![proxy-3](proxy-setting-3.png)
 
-2. You buy a URL from some proxy server website, and copy your URL.
+2. You buy a URL from some proxy server website (e.g., [mojie](https://mojie.me/)), and copy your URL.
 
 3. Copy your URL into clash `Profiles`, and press download.
 

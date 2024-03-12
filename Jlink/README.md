@@ -12,4 +12,4 @@ https://www.segger.com/products/debug-probes/j-link/models/j-link-edu-mini/
 jlink software is available in the following website. The software shall first be installed before any debugging can be performed.
 https://www.segger.com/downloads/jlink/JLink_Windows_x86_64.exe
 
-#### 2.2 connection via commander
+#### 2.2 connection via command line
