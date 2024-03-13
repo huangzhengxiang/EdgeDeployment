@@ -1,6 +1,11 @@
-## Linux Server Connection
+## I. Linux Server Connection
 
 ### 1. OpenSSH KeyGen
+Install OpenSSH client on Linux.
+```bash
+sudo apt install openssh-client
+```
+
 Make sure you have OpenSSH installed on your computer (local PC).
 If so, you shall be able to run the following line successfully.
 
@@ -38,3 +43,19 @@ Host Name
     HostName xxx.xxx.xxx.xxx
     User UserName
     Port PortNumber
+
+## II. Ubuntu Server Enable & Disable
+Install ssh server.
+```bash
+sudo apt install openssh-server
+```
+Stop ssh server
+```bash
+sudo systemctl stop ssh
+sudo systemctl disable ssh
+```
+Restart ssh server
+```bash
+sudo systemctl enable ssh
+sudo systemctl restart ssh
+```
