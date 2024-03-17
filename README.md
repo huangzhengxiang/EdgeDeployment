@@ -9,6 +9,9 @@ A
 C
 - C syntax & Development Issue -> `CDevelopment`
 
+E
+- The introduction of the architecture of Embedded Systems -> `EmbeddedArchi`
+
 G
 - Git usage & GitHub Usages -> `GitHub`
 
@@ -22,6 +25,9 @@ L
 - Linux Desktop Installation & Re-installation Guide -> `LinuxDevelopment/Desktop`
 - Linux Server Configuration & SSH Connection Guide -> `LinuxDevelopment/Server`
 - Linux Bash Manual -> `LinuxDevelopment/bash`
+
+M
+- MNN `CMakeLists.txt` & make instructions.
 
 N
 - Nvidia Board Quick Start Guide -> `Nvidia`
