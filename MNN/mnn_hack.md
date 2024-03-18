@@ -3,6 +3,13 @@
 git clone https://github.com/alibaba/MNN.git
 ~~~
 
+If you run on Ubuntu 18.04LTS or earlier, your gcc, g++ version will be too low.
+Use the following command to upgrade gcc and g++ version >= 8.
+~~~bash
+sudo apt-get install gcc-8 g++-8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100 --slave /usr/bin/g++ g++ /usr/bin/g++-8
+~~~
+
 ### 1. Build for memory monitoring
 Debug Memory is Enabled.
 ~~~bash
