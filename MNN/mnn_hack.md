@@ -10,6 +10,8 @@ sudo apt-get install gcc-8 g++-8
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 100 --slave /usr/bin/g++ g++ /usr/bin/g++-8
 ~~~
 
+(Even higher version can be installed if you add another repository `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`)
+
 ### 1. Build for memory monitoring
 Debug Memory is Enabled.
 ~~~bash
