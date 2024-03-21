@@ -47,7 +47,12 @@ git checkout kv_chunk
 Soft link .so and .h from MNN.
 ~~~bash
 ln -r -s /path/to/MNN/include/MNN include
+
+# for higher version of ld, you can soft link.
 ln -s /path/to/MNN/build/libMNN.so /path/to/MNN/build/express/libMNN_Express.so libs
+
+# for lower version of ld
+cp /path/to/MNN/build/libMNN.so /path/to/MNN/build/express/libMNN_Express.so libs
 ~~~
 
 Then, build.
