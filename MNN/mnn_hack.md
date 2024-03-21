@@ -66,7 +66,7 @@ cd ..
 
 Download models.
 ~~~bash
-./download.sh qwen-7b-chat
+./download_model.sh qwen-7b-chat
 ~~~
 
 Run.
