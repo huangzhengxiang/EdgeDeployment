@@ -23,6 +23,7 @@ make -j20
 You shall export asan ld path before executing.
 ~~~bash
 export LD_PRELOAD=/path/to/libasan.so
+# /lib/x86_64-linux-gnu/libasan.so.6
 ~~~ 
 
 ### 2. Build for ready to use release version
@@ -45,7 +46,7 @@ git checkout kv_chunk
 
 Soft link .so and .h from MNN.
 ~~~bash
-ln -s /path/to/MNN/include/MNN include
+ln -r -s /path/to/MNN/include/MNN include
 ln -s /path/to/MNN/build/libMNN.so /path/to/MNN/build/express/libMNN_Express.so libs
 ~~~
 
