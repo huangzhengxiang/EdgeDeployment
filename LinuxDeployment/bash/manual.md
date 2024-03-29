@@ -22,3 +22,26 @@ Finally, set the new GCC version as the default:
 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave /usr/bin/g++ g++ /usr/bin/g++-11
 ~~~
 You can switch between different versions via `update-alternatives` command.
+
+###  resize swap
+1. Turn off all running swap processes: 
+```bash
+sudo swapoff -a
+```
+2. Resize swap: 
+```bash 
+sudo fallocate -l 8G /swapfile
+``` 
+(change 1G to the gigabyte size you want it to be)
+3. CHMOD swap: 
+```bash
+sudo chmod 600 /swapfile
+```
+4. Make file usable as swap: 
+```bash
+sudo mkswap /swapfile
+```
+5. Active the swap file: 
+```bash
+sudo swapon /swapfile
+```
