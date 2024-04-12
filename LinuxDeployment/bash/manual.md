@@ -1,14 +1,52 @@
 ## Linux Bash
 
-### 1. apt apt-get
+### 0. variables
+For local variables in this bash.
+1. Export it by:
+```bash
+export var=123
+```
+2. Use it by:
+```bash
+echo ${var}
+```
+
+For user variables defined for all bashes for this user.
+Append `export var=123` to the end of `~/.bashrc`
+
+
+### 1. if clause & existence testing
+
+#### 1.1 if-then-else-fi pattern
+The condition clause (if clause) takes the format as follows:
+~~~bash
+export condition=false
+if ${condition}
+then
+    echo "do when condition is true"
+else
+    echo "do when condition is false"
+fi 
+~~~
+
+#### 1.2 Test the existence of a file/dir
+For directory existence, `test -d ${dir_name}`.
+For file existence, `test -f ${file_name}`.
+
+### 2. for clause & iteration
+
+
+
+
+### 3. apt apt-get
 1. add apt-repository
 e.g., add
 ~~~bash
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 ~~~
 
-### 2. gcc g++ toolchain
-#### 2.1 Install higher version of gcc, g++.
+### 4. gcc g++ toolchain
+#### 4.1 Install higher version of gcc, g++.
 First, add new repo.
 ~~~bash
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
