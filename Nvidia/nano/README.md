@@ -45,13 +45,21 @@ https://developer.nvidia.com/embedded/learn/get-started-jetson-nano-devkit#setup
 - For MACOS (Linux).
     1. Before connecting to your Jetson developer kit for initial setup, check to see what Serial devices are already shown on your macOS computer.
     ```bash
+    # macOS
     ls /dev/cu.usbmodem*
+    # Ubuntu
+    ls /dev/ttyACM*
     ```
     The new device is your nano.
     2. screen operation.
     ```bash
     sudo screen /dev/cu.usbmodem14133200001053 115200
+    sudo screen /dev/ttyACM0 115200
     ```
+
+- Serial File Transportation
+Without network connection, the device is directly accessible via IP address `192.168.55.1` with serial connection.
+
 #### 0.2.2 Monitor Mode
 Connect your nano to a monitor and control it as if you are controling an ordinary computer.
 
