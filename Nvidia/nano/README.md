@@ -306,3 +306,15 @@ sudo jtop
 ```
 
 You shall see CPU, Mem, and GPU usage of the process.
+
+## 11. TensorFlow
+
+```bash
+sudo python3 -m pip install --upgrade pip
+sudo pip3 install -U testresources setuptools==59.6.0
+sudo apt-get install python-h5py
+pip3 install h5py==2.7.1
+pip3 install -U future==0.18.2 mock==3.0.5 keras_preprocessing==1.1.2 keras_applications==1.0.8 gast==0.4.0 protobuf pybind11 pkgconfig packaging 
+sudo pip3 install --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v461 tensorflow==2.7.0+nv22.01
+```
+numpy==1.22 h5py==2.10.0
