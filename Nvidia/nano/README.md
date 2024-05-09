@@ -314,12 +314,14 @@ sudo apt-get update
 sudo apt-get install libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev liblapack-dev libblas-dev gfortran
 sudo python3 -m pip install --upgrade pip
 sudo pip3 install -U testresources setuptools==59.6.0
-pip3 install -U Cython==0.29.36 numpy==1.19.4 future==0.18.2 mock==3.0.5 pybind11 pkgconfig packaging gast==0.4.0 keras_preprocessing==1.1.2 keras_applications==1.0.8
+pip3 install -U Cython==0.29.36 numpy==1.19.4 future==0.18.2 mock==3.0.5 pybind11 pkgconfig packaging gast==0.4.0
 # install h5py
 sudo ln -s /usr/include/locale.h /usr/include/xlocale.h
 git clone https://github.com/h5py/h5py.git && cd h5py
 git checkout 3.1.0
 H5PY_SETUP_REQUIRES=0 pip3 install . --no-deps --no-build-isolation
+# install keras
+pip3 install keras_preprocessing==1.1.2 keras_applications==1.0.8 keras==2.7.0
 # install tensorflow
 pip3 install -U --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v461 tensorflow==2.7.0+nv22.01
 ```
