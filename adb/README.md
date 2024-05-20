@@ -4,6 +4,8 @@
 [guide](https://developer.android.com/tools/releases/platform-tools?hl=zh-cn)
 
 ### 1. Enable `Developer options`(开发人员/者选项)
+Please check it each time you connect to a phone.
+
 [guide](https://developer.android.com/studio/debug/dev-options?hl=zh-cn#enable)
 
 `Settings`(设置) > `About phone`(关于手机) > `Build number`(版本号)
