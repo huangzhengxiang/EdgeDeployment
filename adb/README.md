@@ -25,3 +25,21 @@ adb devices
 
 ### 3. ADB Shell
 [Manual](https://adbshell.com/)
+
+### 4. execution access
+executable usually can only executed in `/data/local/tmp`.
+
+```bash
+cd /data/local/tmp
+chmod 777 demo
+```
+
+### 5. top command
+~~~bash
+# sort by memory usage.
+top -s 6
+# sort by CPU usage.
+top -s 9
+# update every 1 sec
+top -d 1 -s 6
+~~~

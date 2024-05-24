@@ -5,8 +5,11 @@ For local variables in this bash.
 1. Export it by:
 ```bash
 export var=123
+# set Link Libraty Path
+export LD_LIBRARY_PATH=.
 ```
-2. Use it by:
+
+2. Use it by `${var}`:
 ```bash
 echo ${var}
 ```
@@ -61,7 +64,21 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave 
 ~~~
 You can switch between different versions via `update-alternatives` command.
 
-###  resize swap
+### 5. top/htop monitoring
+#### 5.1 top command
+top command don't have horizontal usage bars.
+~~~bash
+# sort by memory usage.
+top -s 6
+# sort by CPU usage.
+top -s 9
+# update every 1 sec
+top -d 1 -s 6
+~~~
+
+#### 5.2 htop command
+
+### 6. resize swap
 1. Turn off all running swap processes: 
 ```bash
 sudo swapoff -a
