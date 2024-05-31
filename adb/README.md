@@ -16,6 +16,7 @@ Please check it each time you connect to a phone.
 ### 2. Configurate your PC
 1. MacOS: Okay.
 2. Windows: [Install OEM USB drivers](https://developer.android.com/studio/run/oem-usb)
+   Such platform tools are also called SDK, download such platform tools as adb in this website: [SDK](https://developer.android.com/tools/releases/platform-tools)
 3. Linux: TO BE DONE
 
 Try adb devices, your device shall be on the list if it's detected.
