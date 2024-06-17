@@ -61,6 +61,14 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 --slave 
 ~~~
 You can switch between different versions via `update-alternatives` command.
 
+#### 4.2 update cmake
+Download a newest cmake version from https://cmake.org/download/.
+Append the directory to PATH.
+~~~bash
+export PATH=${PATH}:/path/to/cmake/bin
+# you can also add this line to ~/.bashrc
+~~~
+
 ###  resize swap
 1. Turn off all running swap processes: 
 ```bash
