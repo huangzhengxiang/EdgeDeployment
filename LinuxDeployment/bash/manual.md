@@ -108,3 +108,25 @@ sudo mkswap /swapfile
 ```bash
 sudo swapon /swapfile
 ```
+
+### 7. Networking
+
+#### 7.1 Connection
+1. Connect with gui.
+Connect to WIFI with Network Manager GUI (Graphic User Interface).
+~~~bash
+# install Network Manager
+sudo apt install network-manager network-manager-gnome
+sudo apt install gnome-control-center
+# initiate gui
+gnome-control-center
+~~~
+
+2. Connect from terminal
+Connect to WIFI with Network Manager CMI (Command Line Interface), which functions just the same as the GUI interface on the up-right corner of Ubuntu.
+```bash
+# see available wifi
+nmcli dev wifi list
+# connect to a wifi with WPA/WPA2 authentication
+sudo nmcli dev wifi con "WIFI-NAME" password "WIFI-PASSWORD"
+```
