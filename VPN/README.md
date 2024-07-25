@@ -34,3 +34,16 @@ https://doreamon-design.github.io/clash/configuration/getting-started.html
 ```
 clash -f /path/to/yaml
 ```
+
+## USE PROXY in terminal
+```bash
+# linux
+export HTTP_PROXY=http://127.0.0.1:7890
+export HTTPS_PROXY=http://127.0.0.1:7890
+```
+
+```bat
+# windows
+set HTTP_PROXY=http://127.0.0.1:7890
+set HTTPS_PROXY=http://127.0.0.1:7890
+```
