@@ -1,10 +1,12 @@
 # VPN
 
-## clash
+## Windows
+
+### clash for Windows
 clash is a packet transceiver, routing packets from computer to remote VPN server.
 https://clashforwindows.org/clash-for-windows-download/
 
-## VPN setting
+### VPN setting
 1. Enable proxy on Windows.
 ![proxy-1](proxy-setting-1.png)
 ![proxy-2](proxy-setting-2.png)
@@ -15,3 +17,20 @@ https://clashforwindows.org/clash-for-windows-download/
 3. Copy your URL into clash `Profiles`, and press download.
 
 4. Try something like google scholar.
+
+
+## Linux
+
+### clash for Linux
+Install corresponding version from the release.
+https://github.com/doreamon-design/clash/releases
+```
+mv clash /usr/bin/
+```
+
+### VPN setting
+copy the yaml file to linux machine.
+https://doreamon-design.github.io/clash/configuration/getting-started.html
+```
+clash -f /path/to/yaml
+```
