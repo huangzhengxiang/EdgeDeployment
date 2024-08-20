@@ -26,7 +26,6 @@ adb devices
 
 ### 3. ADB Shell
 [Manual](https://adbshell.com/)
-<<<<<<< HEAD
 
 ### 4. execution access
 executable usually can only executed in `/data/local/tmp`.
@@ -45,5 +44,3 @@ top -s 9
 # update every 1 sec
 top -d 1 -s 6
 ~~~
-=======
->>>>>>> 12ca9176b9c62875ee9b6cc18ece63c7efea4b00
