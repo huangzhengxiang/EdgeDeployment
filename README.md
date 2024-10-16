@@ -40,6 +40,7 @@ S
 
 T
 - TI Board QSG -> `TI`
+- newbie training -> `train`
 
 V
 - VPN Installation & Management -> `VPN`
