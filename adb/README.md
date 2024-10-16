@@ -44,3 +44,6 @@ top -s 9
 # update every 1 sec
 top -d 1 -s 6
 ~~~
+
+### 6. Android NDK for Compilation
+https://developer.android.com/ndk/downloads
