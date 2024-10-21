@@ -210,6 +210,18 @@ Use `foreach()` and `endforeach()` to iterate through a list of items.
     endforeach()
 ```
 
+#### 3.4 add a subdirectory
+You may want to put some of your source files under some subdirectories instead of stuffing all the files under the main directory.
+
+```cmake
+add_subdirectory(source_dir [binary_dir])
+```
+
+`source_dir` specifies where your subdirectory is. subdirectory needs to contain a `CMakeLists.txt` itself.
+
+You can specify a designated `binary_dir` so that the targets in subdirectory will be built in your specified location.
+
+
 ### 4. options, conditional clauses, compile definitions
 When you what to compile your programs for multiple use cases, especially for multiple backends, setting options and cmake according to conditional clauses is essential.
 
