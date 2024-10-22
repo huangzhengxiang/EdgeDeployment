@@ -375,13 +375,52 @@ find_package(OpenMP)
 add_library(OpenMP::OpenMP_CXX IMPORTED INTERFACE)
 ```
 
+* `<version>` here represents a minimum version required.
+
 After you find the package, then every corresponding information can be accessed.
 
 ### 7. Mixed Compilation (C, Cpp, Asm, Cuda...)
 
 #### 7.1 Compile Cuda
+In this post I want to show you how easy it is to build CUDA applications using the features of CMake 3.8+ (3.9 for MSVC support). Since 2009, CMake (starting with 2.8.0) has provided the ability to compile CUDA code through custom commands such as `cuda_add_executable`, and `cuda_add_library` provided by the FindCUDA package. CMake 3.8 (3.9) makes CUDA C++ an intrinsically supported language. 
+
+1. find package of CUDA to get all CUDA info
+    ```cmake
+    # To enjoy the features of cmake cuda support, ensure your cmake_minimum_required(VERSION 3.10)
+    cmake_minimum_required(VERSION 3.10)
+    find_package(CUDA 12.2)
+    ```
+
+2. set `CUDA_NVCC_FLAGS`
+    Being counterpart of `CMAKE_CXX_FLAGS` and `CMAKE_C_FLAGS`, cpp standard, arch, and optimization level shall be set appended to `CUDA_NVCC_FLAGS`.
+
+    Following is an example.
+
+    ```cmake
+    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -gencode arch=compute_80,code=sm_80")
+    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} -gencode arch=compute_86,code=sm_86")
+    set(CUDA_NVCC_FLAGS "${CUDA_NVCC_FLAGS} --std=c++17 -O3")
+    ```
+
+3. include header files
+    The header files are under the directories specified by the keyword `${CUDA_INCLUDE_DIRS}`, by including this directory, most headers such as `<cuda_runtime.h>` can be included.
+
+    ```cmake
+    include_directories(${CUDA_INCLUDE_DIRS})
+    ```
+   
+4. add libraries/executables
+    Replace normal `add_library` and `add_executable` commands with cuda-targeted `cuda_add_library` and `cuda_add_executable`. By doing so, most of the required libraries are automatically linked and compiled. Thanks to CUDA becoming one of cmake intrinsic languages.
+
+#### 7.2 Compile ARM Asm
 
 
+
+#### 7.3 Compile OpenCL
+
+
+
+#### 7.4 Compile Metal
 
 ### 8. Cross Compilation (compile for another machine)
 
