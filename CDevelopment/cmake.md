@@ -347,6 +347,7 @@ target_link_libraries(Model
 ```
 
 ### 6. find external package/library
+#### 6.1 find library
 https://cmake.org/cmake/help/latest/command/find_library.html
 ```cmake
 find_library (
@@ -362,8 +363,23 @@ find_library(Metal Metal REQUIRED)
 ```
 <VAR> being the var you want to store the found lib, name being the name of that lib, `REQUIRED` specify whether the lib is required. If not found, result will be set to `<VAR>-NOTFOUND`.
 
+The found library shall be linked in the following.
+
+#### 6.2 find package
+Unlike finding a library, `find_package` can find and load not only all the libraries but also the detailed information also.
+
+```cmake
+find_package(<PackageName> [<version>] [REQUIRED])
+# example: find OpenMP and then add the libraries in it.
+find_package(OpenMP)
+add_library(OpenMP::OpenMP_CXX IMPORTED INTERFACE)
+```
+
+After you find the package, then every corresponding information can be accessed.
 
 ### 7. Mixed Compilation (C, Cpp, Asm, Cuda...)
+
+#### 7.1 Compile Cuda
 
 
 
