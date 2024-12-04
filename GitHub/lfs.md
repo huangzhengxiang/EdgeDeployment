@@ -12,8 +12,18 @@ sudo apt install git-lfs
 brew install git-lfs
 ```
 
-### usage
+### cloning large files
 ```bash
 git lfs install
 git clone [yout-repo]
+```
+
+### pushing large files
+https://medium.com/junior-dev/how-to-use-git-lfs-large-file-storage-to-push-large-files-to-github-41c8db1e2d65
+
+```bash
+git lfs install
+git lfs track [your-large-files]
+# remove your ignore line in .gitignore
+git add .
 ```
