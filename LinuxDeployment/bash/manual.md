@@ -130,3 +130,15 @@ nmcli dev wifi list
 # connect to a wifi with WPA/WPA2 authentication
 sudo nmcli dev wifi con "WIFI-NAME" password "WIFI-PASSWORD"
 ```
+
+
+### 8. Lookup for a file
+
+#### 8.1 find
+search for a file in a designated directory.
+
+```bash
+find ./ -name libc++_shared.so
+# in the format of
+find ${search-dir} -name ${search-file}
+```
