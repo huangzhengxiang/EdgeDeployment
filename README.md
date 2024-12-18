@@ -3,7 +3,7 @@ This is a backup note for edge deployment.
 
 ### Table Of Contents (alphabetical order)
 A
-- adb shell instructions -> `adb`
+- android development -> `android`
 - ARM Development -> `ARMDevelopment`
 
 C
