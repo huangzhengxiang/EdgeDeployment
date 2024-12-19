@@ -16,9 +16,13 @@ chmod u+x record_android_trace
 
 ### Perfetto
 https://ui.perfetto.dev/
-Used to visualize CPU utilization.
+Used to visualize CPU utilization.https://developer.android.com/topic/performance/power/setup-battery-historian
 
 
 ### Android studio standalone profiler
 https://developer.android.com/studio/profile/standalone-profiler
 initiate the profiler in the installation path bin.
+
+### Battery Level Profiling
+https://developer.android.com/topic/performance/power/setup-battery-historian 
+https://github.com/google/battery-historian
