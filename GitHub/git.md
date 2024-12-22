@@ -6,8 +6,8 @@
 If no conflicts take place, use `git pull` and `git push` to synchronize with the remote upstreams is possible.
 
 ```bash
-git pull origin ${remote}/${local}
-git push origin ${local}/${remote}
+git pull origin ${remote}:${local}
+git push origin ${local}:${remote}
 ```
 
 #### 1.2 Merge
@@ -17,11 +17,29 @@ However, if ff is not possible due to conflicts, please use `git merge` to merge
 git merge ${other}
 ```
 
+Note: The remote branch is in the form of `<stream>/branch`, such as `origin/master`.
 
-### 2. Submodule
+
+### 2. git diff
+
+To ensure the correctness of merge, git diff can be used to view the differences between branches.
+
+#### 2.1 Branch comparison
+You can compare 2 branches with the following command.
+```bash
+git diff ${branch1} ${branch2}
+```
+
+#### 2.2 File comparison
+You can compare 2 files from different branches with the following command.
+```bash
+git diff ${branch1}:${file1} ${branch2}:${file2}
+```
+
+### 3. Submodule
 https://github.blog/open-source/git/working-with-submodules/
 
-#### 2.1 submodule add
+#### 3.1 submodule add
 If your GitHub repository is referencing another GitHub repo, git submodule can be used to sync it to your repo.
 
 ```bash
@@ -31,7 +49,7 @@ git submodule add ${submodule-url} ${your-folder}
 
 A .gitmodules file will be generated afterwards.
 
-#### 2.2 submodule update and syc
+#### 3.2 submodule update and syc
 https://stackoverflow.com/questions/5828324/update-git-submodule-to-latest-commit-on-origin
 
 To sync the latest change of the submodule repo, 2 options are possible:
