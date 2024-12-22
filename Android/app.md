@@ -18,6 +18,7 @@ https://developer.android.com/guide
 
 #### 1.2 gradle script syntax (Groovy v.s. Kotlin)
 https://developer.android.com/build/migrate-to-kotlin-dsl?hl=zh-cn
+https://docs.gradle.org/current/userguide/migrating_from_groovy_to_kotlin_dsl.html
 
 ### 2. jni
 确保native方法的声明和实现匹配：
