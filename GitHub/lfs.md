@@ -27,3 +27,8 @@ git lfs track [your-large-files]
 # remove your ignore line in .gitignore
 git add .
 ```
+
+### deactivate
+```bash
+git lfs uninstall
+```

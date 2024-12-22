@@ -16,6 +16,9 @@ https://developer.android.com/guide
 2. dependencies of sdk (API level) version <-> ndk version (if native c/cpp is used)
 3. dependencies of gradle version (build tools) <-> jdk version (JVM compiler)
 
+#### 1.2 gradle script syntax (Groovy v.s. Kotlin)
+https://developer.android.com/build/migrate-to-kotlin-dsl?hl=zh-cn
+
 ### 2. jni
 确保native方法的声明和实现匹配：
 确保Java类中声明的native方法与C/C++代码中的实现完全匹配，包括方法名、参数类型和顺序、返回类型等。JNI接口命名规则是Java_完整类名_方法名_参数类型，例如：Java_com_mnn_llm_Chat_Init。
