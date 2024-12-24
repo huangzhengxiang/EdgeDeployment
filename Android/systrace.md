@@ -26,3 +26,6 @@ initiate the profiler in the installation path bin.
 ### Battery Level Profiling
 https://developer.android.com/topic/performance/power/setup-battery-historian 
 https://github.com/google/battery-historian
+
+Use `BatteryManager` to record battery in java (Android Studio app). 
+https://developer.android.com/reference/android/os/BatteryManager.html#BATTERY_PROPERTY_CURRENT_NOW
