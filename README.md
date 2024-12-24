@@ -14,6 +14,7 @@ E
 
 G
 - Git usage & GitHub Usages -> `GitHub`
+- Go usage -> `Go`
 
 H
 - Huawei cell phone development -> `HUAWEI`
