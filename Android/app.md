@@ -123,3 +123,44 @@ try {
     Log.e("MediaPlayer Error", "prepare() failed: "+e.getMessage());
 }
 ```
+
+#### 4.2 WAVE format
+`AudioRecord` is how you can record a `.wav`, and `.wav` format is not supported in MediaRecorder. Customized `.wav` Android Recorder can be found in this directory: https://github.com/vishwakneelamegam/android-wav.git
+
+### 5. Use File Without Permission
+**Remember to check logcat results for `Permission Denied` everytime you first deploy a program. This is the golden rule.**
+
+After Android 10 (API level 29), File Permission shrinks. After Android 14 (API level 34), File Permission requests simply fail.
+
+The latest way to access temperary file for application use, is to call `getExternalFilesDir("Recordings");` inside a class, returning a `File` object. The returned directory and files may not automatically opened. However, the `File` object is what we get full access over.
+
+```java
+// prepare a directory
+recordDir = getExternalFilesDir("Recordings");
+if (!recordDir.exists()) {
+    recordDir.mkdirs();
+}
+// get path
+recordPath = recordDir.getPath();
+```
+
+### 6. Coordinate Layout(xml) and Activity(java)
+Each View object in the Activity shall be  found in the xml.
+The following example shows how a Button is coordinated.
+```xml
+<Button
+    android:id="@+id/load_button"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginTop="110dp"
+    android:layout_marginBottom="40dp"
+    android:background="#3bb5ee"
+    android:text="加载模型"
+    android:onClick="loadModel">
+</Button>
+```
+The `@+id/load_button` term defines the id of the button in the view.
+```java
+mLoadButton = findViewById(R.id.load_button);
+```
