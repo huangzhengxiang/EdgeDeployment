@@ -21,6 +21,8 @@ https://developer.android.com/build/migrate-to-kotlin-dsl?hl=zh-cn
 https://docs.gradle.org/current/userguide/migrating_from_groovy_to_kotlin_dsl.html
 
 ### 2. jni
+
+#### 2.1 compilation of jni
 确保native方法的声明和实现匹配：
 确保Java类中声明的native方法与C/C++代码中的实现完全匹配，包括方法名、参数类型和顺序、返回类型等。JNI接口命名规则是Java_完整类名_方法名_参数类型，例如：Java_com_mnn_llm_Chat_Init。
 
@@ -50,6 +52,10 @@ android {
         abiFilters 'armeabi-v7a', 'arm64-v8a'
     }
 }
+
+#### 2.2 type conversion of jni
+https://blog.csdn.net/tantion/article/details/84248654
+Basic jobject can be convert to c object directly, while jstring and char* may be a little bit trickier (use `env->GetStringUTFChars`).
 
 ### 3. LogCat
 #### C/C++
