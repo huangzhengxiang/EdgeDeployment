@@ -47,3 +47,9 @@ top -d 1 -s 6
 
 ### 6. Android NDK for Compilation
 https://developer.android.com/ndk/downloads
+
+### 7. apk installation
+
+```bash
+adb install /path/to/apk
+```
