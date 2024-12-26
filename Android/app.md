@@ -170,3 +170,8 @@ The `@+id/load_button` term defines the id of the button in the view.
 ```java
 mLoadButton = findViewById(R.id.load_button);
 ```
+
+### 7. Preformance of Different Build Types
+For `Release` Type build (unsigned), the app is 2~3 times faster than `Debug` Type build.
+
+The `Signed` release version is another 50% faster than `Release` (unsigned).
