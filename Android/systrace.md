@@ -78,21 +78,28 @@ public class EnergyMonitor extends TimerTask {
 }
 ```
 
-In MainActivity.java, initialize the Timer and TimerTask.
+In MainActivity.java, initialize the Timer and TimerTask. Timer and Task shall initiate again after cancalled.
 ```java
 // MainActivity.java
-private void startEnergyTracing() {
-    energyMonitor.resetInfo();
-    energyTimer.scheduleAtFixedRate(energyMonitor, 0, energySampleInterval);
-}
+    private void startEnergyTracing() {
+        energyTimer = new Timer();
+        energyMonitor = new EnergyMonitor(this);
+        energyMonitor.resetInfo();
+        energyTimer.scheduleAtFixedRate(energyMonitor, 0, energySampleInterval);
+    }
 
-private void endEnergyTracing() {
-    energyTimer.cancel();
-}
+    private void endEnergyTracing() {
+        try {
+            energyTimer.cancel();
+        } catch (Exception e) {
+            Log.e("endEnergyTracing", e.getMessage());
+        }
+    }
 
-private int getAvgCurrent() {
-    return energyMonitor.getAvgCurrent();
-}
+    private int getAvgCurrent() {
+        return energyMonitor.getAvgCurrent();
+    }
+
 
 // in onCreate
 energyTimer = new Timer();
