@@ -18,6 +18,7 @@ G
 
 H
 - Huawei cell phone development -> `HUAWEI`
+- Huawei Hisilicon AI Library Plugins -> `HUAWEI/HIAI`
 
 J
 - Jlink Installation & Usage -> `Jlink`
@@ -26,12 +27,16 @@ L
 - Linux Desktop Installation & Re-installation Guide -> `LinuxDevelopment/Desktop`
 - Linux Server Configuration & SSH Connection Guide -> `LinuxDevelopment/Server`
 - Linux Bash Manual -> `LinuxDevelopment/bash`
+- LaTex Writing -> `LaTex`
 
 M
 - MNN `CMakeLists.txt` & make instructions.
 
 N
 - Nvidia Board Quick Start Guide -> `Nvidia`
+
+Q
+- Qualcomm DSP AI Library Sdk Usage -> `LaTex`
 
 R
 - Renesas Board QSG + fsp package -> `Renesas`

@@ -4,6 +4,7 @@
 
 #### 1.1 On device tracing
 https://developer.android.com/topic/performance/tracing/on-device
+trace file stored in directory: `/data/local/traces/`
 
 #### 1.2 cmd tracing
 https://perfetto.dev/docs/quickstart/android-tracing
@@ -18,7 +19,7 @@ chmod u+x record_android_trace
 
 #### 1.3 Perfetto visualization
 https://ui.perfetto.dev/
-Used to visualize CPU utilization.https://developer.android.com/topic/performance/power/setup-battery-historian
+Used to visualize CPU utilization.
 
 
 #### 1.4 Android studio standalone profiler
@@ -34,6 +35,7 @@ https://github.com/google/battery-historian
 Use `BatteryManager` to record battery in java (Android Studio app). 
 https://developer.android.com/reference/android/os/BatteryManager.html#BATTERY_PROPERTY_CURRENT_NOW
 
+The information is stored in `/sys/class/power_supply/battery/`, which needs system/root access to read unfortunately.
 
 #### 2.2 ACTION_BATTERY_CHANGED (too coarse)
 `EXTRA_LEVEL`, `EXTRA_SCALES`, and `CAPACITY_LEVEL` are all of the granularity of integer part of 100%, no fractional part. Too coarse for energy analysis.
@@ -106,3 +108,8 @@ energyTimer = new Timer();
 energyMonitor = new EnergyMonitor(this);
 startEnergyTracing();
 ```
+
+#### 2.5 Device Heterogeneity
+https://stackoverflow.com/questions/64532112
+
+Different devices may use different unit when reporting current. (mA/uA).
