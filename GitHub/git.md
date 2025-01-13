@@ -64,3 +64,23 @@ git submodule foreach git pull origin master
 # update to the latest commit available. (only for 1 submodule)
 cd ${submodule-dir} && git pull
 ```
+
+### 4. git branch
+
+#### 4.1 open up a local branch
+```bash
+git branch ${branch-name}
+```
+
+#### 4.2 checkout
+Switch the current workplace to the new local branch.
+
+```bash
+git checkout ${branch-name}
+```
+
+#### 4.3 delete a branch
+
+```bash
+git branch -d -r ${branch-name}
+```
