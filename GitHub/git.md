@@ -1,5 +1,10 @@
 ## Git
 
+### 0. Congif
+
+#### 0.1 Buffer Size
+git config --global http.postBuffer 524288000
+
 ### 1. Merge
 
 #### 1.1 Fast-Forward
@@ -63,6 +68,13 @@ git submodule update --recursive
 git submodule foreach git pull origin master
 # update to the latest commit available. (only for 1 submodule)
 cd ${submodule-dir} && git pull
+```
+
+#### 3.3 update a submodule after clone
+Change directory to the folder.
+```bash
+#
+
 ```
 
 ### 4. git branch
