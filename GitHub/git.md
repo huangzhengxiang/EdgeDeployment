@@ -3,7 +3,13 @@
 ### 0. Congif
 
 #### 0.1 Buffer Size
+To make sure you can download smoothly, you can enlarge the postBuffer size.
+```bash
+# enlarge buffer to 500MB
 git config --global http.postBuffer 524288000
+# enlarge buffer to 1GB
+git config --global http.postBuffer 1073741824
+```
 
 ### 1. Merge
 
@@ -71,10 +77,10 @@ cd ${submodule-dir} && git pull
 ```
 
 #### 3.3 update a submodule after clone
-Change directory to the folder.
+Change directory to the folder and update the submodule. This command combine init and update together.
 ```bash
-#
-
+# update to the previously indexed commit. Combine init and update.
+git submodule update --init --recursive
 ```
 
 ### 4. git branch
