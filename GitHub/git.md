@@ -21,6 +21,11 @@ git pull origin ${remote}:${local}
 git push origin ${local}:${remote}
 ```
 
+You can also push a detached head to a remote stream. Notice that head is referred to as `HEAD`.
+```bash
+git push <stream> HEAD:<branch>
+```
+
 #### 1.2 Merge
 However, if ff is not possible due to conflicts, please use `git merge` to merge other stream to current stream and resolve conflicts in vscode manually.
 
@@ -28,8 +33,13 @@ However, if ff is not possible due to conflicts, please use `git merge` to merge
 git merge ${other}
 ```
 
-Note: The remote branch is in the form of `<stream>/branch`, such as `origin/master`.
+Note: The remote branch is in the form of `<stream>/<branch>`, such as `origin/master`.
 
+#### 1.3 upstream
+Add a new upstream to a directory.
+```bash
+git remote add <stream> <url>
+```
 
 ### 2. git diff
 
