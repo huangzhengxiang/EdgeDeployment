@@ -110,5 +110,15 @@ git checkout ${branch-name}
 #### 4.3 delete a branch
 
 ```bash
+# delete a local branch
+git branch -d ${branch-name}
+# delete a remote branch
 git branch -d -r ${branch-name}
+```
+
+#### 4.4 rename a branch
+For example, a branch called `HEAD` is accidentally created, the only way to resolve it to disambiguous it from the detached HEAD is to rename the `HEAD` branch to other name.
+
+```bash
+git branch -m HEAD tmp
 ```
