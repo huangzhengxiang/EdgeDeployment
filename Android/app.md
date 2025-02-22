@@ -53,6 +53,11 @@ android {
     }
 }
 
+Use keyword `extrern "C"` to wrap your native source code, so that the java compiler won't ppbe confused with the mangling issue.
+https://stackoverflow.com/questions/33878523/getting-unsatisfied-link-error-while-making-a-jni-call
+
+![jni dismanled](jni.png)
+
 #### 2.2 type conversion of jni
 https://blog.csdn.net/tantion/article/details/84248654
 Basic jobject can be convert to c object directly, while jstring and char* may be a little bit trickier (use `env->GetStringUTFChars`).
@@ -150,7 +155,14 @@ if (!recordDir.exists()) {
 recordPath = recordDir.getPath();
 ```
 
-### 6. Coordinate Layout(xml) and Activity(java)
+
+### 6. Preformance of Different Build Types
+For `Release` Type build (unsigned), the app is 2~3 times faster than `Debug` Type build.
+
+The `Signed` release version is another 50% faster than `Release` (unsigned).
+
+### 7. Layout(xml) and Activity(java)
+#### 7.1 Initialization
 Each View object in the Activity shall be  found in the xml.
 The following example shows how a Button is coordinated.
 ```xml
@@ -171,7 +183,10 @@ The `@+id/load_button` term defines the id of the button in the view.
 mLoadButton = findViewById(R.id.load_button);
 ```
 
-### 7. Preformance of Different Build Types
-For `Release` Type build (unsigned), the app is 2~3 times faster than `Debug` Type build.
-
-The `Signed` release version is another 50% faster than `Release` (unsigned).
+### 8. Layout & View (xml specification)
+#### 8.0 Content
+1. `ScrollView`: Make a scrollable View that can be scrolled up and down. Only 1 Layout can affiliate to it, whose layout_gravity shall be set `fill`: `android:layout_gravity="center|fill"`.
+2. `LinearLayout`: A horizontal one or a vertical one, set by `android:orientation=`.
+3. `ListView`: A List object that can display selection and alternatives.
+4. `ArrayAdapter`: `ArrayAdapter` is a class in Android that extends `BaseAdapter` and is used to display a list of items in a `ListView` or `Spinner`. It is a convenient way to bind an array of data to a `ListView` or `Spinner` and handle the display of each item.
+5. `@string/xxx`: `@string` is a reference to a string resource defined in the `.xml` file. This file is located in the `res/values` directory of your Android project. Referred to in java by `R.string.xxx`.
