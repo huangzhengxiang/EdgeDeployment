@@ -191,3 +191,104 @@ mLoadButton = findViewById(R.id.load_button);
 4. `ArrayAdapter`: `ArrayAdapter` is a class in Android that extends `BaseAdapter` and is used to display a list of items in a `ListView` or `Spinner`. It is a convenient way to bind an array of data to a `ListView` or `Spinner` and handle the display of each item.
 5. `@string/xxx`: `@string` is a reference to a string resource defined in the `.xml` file. This file is located in the `res/values` directory of your Android project. Referred to in java by `R.string.xxx`.
 6. `EditText`: A very useful text input View. `android:hint=` can be used to set the hint message before user input, which can be modified after using `seteHint`.
+
+### 9. Unrooted Ways to Get Hardware Info
+#### 9.1 CPU temperature
+Stored in directory `/sys/class/thermal/thermal_zone*` are temperature info of all thermal zones, each with a `type` field and a `temp` field. `type` is the name of the thermal zone while `temp` is the actual temperature term in milli-Celsius/Celsius. Below is the code of 1 way to read it.
+
+You can have a double check for the type name with `cat` command. 
+```bash
+adb shell "cat /sys/class/thermal/thermal_zone*/temp"
+```
+
+As for Huawei Mate40 Pro, the proper thermal zone can be `cluster2`, while for Meizu 21, the proper thermal zone is `cpu-2-0-1`.
+```java
+private float getCPUTemperature() {
+    float tempInCelsius = 0;
+    try {
+        for (int i=0; i<30; ++i) {
+            BufferedReader reader = new BufferedReader(new FileReader(String.format("/sys/class/thermal/thermal_zone%d/type", i)));
+            String type = reader.readLine();
+            reader = new BufferedReader(new FileReader(String.format("/sys/class/thermal/thermal_zone%d/temp", i)));
+            String temperature = reader.readLine(); // Read the first line of the file
+            // Convert the temperature from millidegrees Celsius to degrees Celsius if necessary.
+            tempInCelsius = (float) Integer.parseInt(temperature);
+            if (tempInCelsius>1000)  {
+                tempInCelsius = tempInCelsius/ 1000.0f;
+            }
+            if (type.contains("cpu-") || type.contains("cluster") || type.contains("cpu0")) {
+                break;
+            }
+    } catch (IOException e) {
+        Log.e("Error", "Bad Read");
+    }
+    Log.i("Temperature", "CPU Temperature: " + tempInCelsius + "°C");
+    return tempInCelsius;
+}
+```
+
+* Note that HardwarePropertiesManager mentioned in the following url is inaccessible without root access.
+https://stackoverflow.com/questions/51252807/android-api-to-check-if-the-cpu-is-slowed-down
+https://developer.android.com/reference/android/os/HardwarePropertiesManager#DEVICE_TEMPERATURE_CPU
+
+#### 9.2 Battery Charge Level & Voltage
+https://developer.android.com/reference/android/os/BatteryManager
+
+The current battery charge level and voltage is broadcast upon changes, if a BroadcastReceiver is set up as below (IntentFilter set to filter ACTION_BATTERY_CHANGED):
+
+```java
+IntentFilter intentfilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+Intent batteryStatus = this.registerReceiver(broadcastreceiver, intentfilter);
+
+private BroadcastReceiver broadcastreceiver = new BroadcastReceiver() {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        mBatteryVoltage = (float) (intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE,0)) / 1000f; // mV -> V
+        mChargeNow = (int) (intent.getIntExtra(BatteryManager.EXTRA_LEVEL,0)); // charge level
+    }
+};
+```
+
+#### 9.3 Battery Current Input Current (positive for net input)
+
+The current input current (positive for net input) can be only monitor at real-time inside another opening thread (a timer task) for every time interval. A good way to monitor it is to define a class, extending `TimerTask`.
+
+```java
+public class EnergyMonitor extends TimerTask {
+    EnergyMonitor(Context parent) {
+        uAList = new ArrayList<Integer>();
+        VList = new ArrayList<Float>();
+        ctx = parent;
+    }
+
+    @Override
+    public void run() {
+        int mBatteryCurrent = ((BatteryManager) ctx.getSystemService(Context.BATTERY_SERVICE)).getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+        if (Math.abs(mBatteryCurrent) <= 10000) { mBatteryCurrent *= 1000; } // convert mA -> uA. (device heterogeneity resolution.)
+        uAList.add(mBatteryCurrent);
+    }
+}
+```
+
+Note that only the `MainActivity` can make calls to `getSystemService` and access BatteryManager, so that itself shall be passed to the timer task during initialization.
+
+Such initialization is inside `MainActivity`.
+
+```java
+public class MainActivity extends AppCompatActivity {
+    private void startEnergyTracing() {
+        energyTimer = new Timer();
+        energyMonitor = new EnergyMonitor(this);
+        energyMonitor.resetInfo();
+        energyTimer.scheduleAtFixedRate(energyMonitor, 0, energySampleInterval);
+    }
+
+    private void endEnergyTracing() {
+        try {
+            energyTimer.cancel();
+        } catch (Exception e) {
+            Log.e("endEnergyTracing", e.getMessage());
+        }
+    }
+}
+```
