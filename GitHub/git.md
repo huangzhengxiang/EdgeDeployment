@@ -1,6 +1,6 @@
 ## Git
 
-### 0. Congif
+### 0. Congif & clone
 
 #### 0.1 Buffer Size
 To make sure you can download smoothly, you can enlarge the postBuffer size.
@@ -10,6 +10,16 @@ git config --global http.postBuffer 524288000
 # enlarge buffer to 1GB
 git config --global http.postBuffer 1073741824
 ```
+
+#### 0.2 clone
+`git clone` is where everything starts.
+```bash
+git clone <url>
+git clone <url> <local_path>
+git clone --recursive <url>
+```
+
+Basically, a `git clone` clones a repo from a url (to a local path). Adding `--recursive` can resolve submodule download.
 
 ### 1. Merge
 
