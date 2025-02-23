@@ -190,3 +190,4 @@ mLoadButton = findViewById(R.id.load_button);
 3. `ListView`: A List object that can display selection and alternatives.
 4. `ArrayAdapter`: `ArrayAdapter` is a class in Android that extends `BaseAdapter` and is used to display a list of items in a `ListView` or `Spinner`. It is a convenient way to bind an array of data to a `ListView` or `Spinner` and handle the display of each item.
 5. `@string/xxx`: `@string` is a reference to a string resource defined in the `.xml` file. This file is located in the `res/values` directory of your Android project. Referred to in java by `R.string.xxx`.
+6. `EditText`: A very useful text input View. `android:hint=` can be used to set the hint message before user input, which can be modified after using `seteHint`.
