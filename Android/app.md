@@ -292,3 +292,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+
+### 10. Wrap data files into app
+* Access file by Resource ID: put it under `src/main/res/raw`.
+* Access file by original path/name: put it under `src/main/assets`.
