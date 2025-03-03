@@ -14,3 +14,4 @@ type: `terminal`, to actually open up one.
 
 #### 3.1 open up `Commnad Palette`
 `command`+`shift`+`p`
+In `Command Palette`, type `New Window` to open up a new window.
