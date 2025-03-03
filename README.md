@@ -20,6 +20,9 @@ H
 - Huawei cell phone development -> `HUAWEI`
 - Huawei Hisilicon AI Library Plugins -> `HUAWEI/HIAI`
 
+i
+- iOS development -> `iOS`
+
 J
 - Jlink Installation & Usage -> `Jlink`
 
@@ -31,6 +34,7 @@ L
 
 M
 - MNN `CMakeLists.txt` & make instructions.
+- macOS development -> `macOS`
 
 N
 - Nvidia Board Quick Start Guide -> `Nvidia`

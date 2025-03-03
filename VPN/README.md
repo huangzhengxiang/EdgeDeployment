@@ -47,3 +47,15 @@ export HTTPS_PROXY=http://127.0.0.1:7890
 set HTTP_PROXY=http://127.0.0.1:7890
 set HTTPS_PROXY=http://127.0.0.1:7890
 ```
+
+## Android
+
+### Clash for Android (Clash Meta)
+https://github.com/MetaCubeX/ClashMetaForAndroid
+
+Find and get apk in release (arm-v8a)
+
+## macOS
+
+### ClashX
+https://clashx.org/clashx-official/
