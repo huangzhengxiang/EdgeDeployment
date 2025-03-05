@@ -9,6 +9,25 @@ gcc/g++, clang/clang++, and llvm are all supported for macOS.
 
 Then is time for `make` and `cmake`. After both are installed, you are ready to compile.
 
+
+***Full Xcode*** can be installed either from APP Store or its official website.
+Lateset Xcode version: https://developer.apple.com/download/applications/
+
+
+***Switch between above two***
+https://github.com/nodejs/node-gyp/issues/569
+Note that `xcodebuild` can only be used with full Xcode, so that before compiling with xcodebuild command, full version Xcode shall be selected. (Change it to your own path.)
+
+```zsh
+# Change the path if you installed Xcode somewhere else.
+sudo xcode-select -s /path/to/Xcode.app/Contents/Developer
+```
+
+You can try to switch back to command lin tool if you wish.
+```zsh
+sudo xcode-select --switch /Library/Developer/CommandLineTools # Enable command line tools
+```
+
 #### 1.2 compile MNN
 
 
