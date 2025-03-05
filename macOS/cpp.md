@@ -28,6 +28,10 @@ You can try to switch back to command lin tool if you wish.
 sudo xcode-select --switch /Library/Developer/CommandLineTools # Enable command line tools
 ```
 
+***Xcode Proxy*** can directly been set by setting it in the zsh shell and opening the project from the shell. 
+(refer to https://forums.swift.org/t/xcode-not-follows-system-proxy-settings-to-resolve-swiftpm-dependencies/34137/4)
+This way of setting proxy is graceful indeed.
+
 #### 1.2 compile MNN
 
 
