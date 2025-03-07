@@ -29,3 +29,7 @@ After downloading and installing the two SDKs, copy the SDK directories into the
 
 #### Troubleshooting during setup
 Installation cache lies in `/tmp/QIKCache/`, package cache (ndk, jre, ecllipse) lies in `/tmp`, good networking shall be ensured.
+
+### Troubleshooting during library loading
+All dependent libraries are needed, besides `libQnnCpu.so` and `libQnnHtp.so`.
+![Alt text](image.png)
