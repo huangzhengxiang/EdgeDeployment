@@ -192,6 +192,13 @@ mLoadButton = findViewById(R.id.load_button);
 5. `@string/xxx`: `@string` is a reference to a string resource defined in the `.xml` file. This file is located in the `res/values` directory of your Android project. Referred to in java by `R.string.xxx`.
 6. `EditText`: A very useful text input View. `android:hint=` can be used to set the hint message before user input, which can be modified after using `seteHint`.
 
+#### 8.1 Visibility
+Visibility State:
+
+***VISIBLE***: The widget is visible and occupies space in the layout.
+***INVISIBLE***: The widget is not visible but still occupies space in the layout.
+***GONE***: The widget is not visible and does not occupy any space in the layout.
+
 ### 9. Unrooted Ways to Get Hardware Info
 #### 9.1 CPU temperature
 Stored in directory `/sys/class/thermal/thermal_zone*` are temperature info of all thermal zones, each with a `type` field and a `temp` field. `type` is the name of the thermal zone while `temp` is the actual temperature term in milli-Celsius/Celsius. Below is the code of 1 way to read it.
