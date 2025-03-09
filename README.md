@@ -33,7 +33,7 @@ L
 - LaTex Writing -> `LaTex`
 
 M
-- MNN `CMakeLists.txt` & make instructions.
+- Reference to MNN repository -> `MNN`.
 - macOS development -> `macOS`
 
 N
