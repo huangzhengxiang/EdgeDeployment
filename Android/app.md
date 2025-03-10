@@ -72,6 +72,10 @@ Log.e([Tag], [msg])
 Log.d([Tag], [msg])
 Log.i([Tag], [msg])
 
+#### log library linker flag for static compilation
+https://github.com/catchorg/Catch2/issues/1720
+Add `-DCMAKE_CXX_FLAGS="-llog"` to cmake list.
+
 ### 4. Multi-Media Supports
 
 #### 4.1 Audio Data
