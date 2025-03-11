@@ -95,7 +95,7 @@ Method definition:
 
     Bridging is necessary to bridge between Objective-C++ and Swift.
     - The bridging header is necessary if you are working in a Swift project that includes Objective-C code. It allows Swift to see the Objective-C classes and methods.
-    - Ensure the bridging header is correctly set up in your project settings under `Swift Compiler` - `General` -> `Objective-C Bridging Header`.
+    - Ensure the bridging header is correctly set up in your project settings under `Build Settings` -> `Swift Compiler - General` -> `Objective-C Bridging Header`.
 
 
 

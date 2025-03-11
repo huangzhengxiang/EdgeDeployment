@@ -32,8 +32,4 @@ sudo xcode-select --switch /Library/Developer/CommandLineTools # Enable command 
 (refer to https://forums.swift.org/t/xcode-not-follows-system-proxy-settings-to-resolve-swiftpm-dependencies/34137/4)
 This way of setting proxy is graceful indeed.
 
-#### 1.2 compile MNN
-
-
-
-### II. cross-compile a C program for iOS
+### For IOS cross-compilation, refer yourself to the `iOS` folder for a thorough guide
