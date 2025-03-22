@@ -64,6 +64,21 @@ Method definition:
 }
 ```
 
+#### 1.3* Special: Class constructor method definition
+For objc, the first argument of the function does not have a reference. In order to refer to it, the parameterName shall be add to the `init` function name suffix.
+
+For example, if hopping the name to be `name`, the function can be named after `initWithName` or `initName`. The `self` instance is returned from [super init] and then operated on and returned.
+
+```objc
+- (instancetype)initWithName:(NSString *)name {
+    self = [super init];
+    // operations
+    return self;
+}
+```
+
+The function signature is automatically resolved when bridging objc and swift.
+
 #### 1.4 method calling
 1. Objective-C++ calling in Objective-C++:
     ```objc
@@ -98,4 +113,5 @@ Method definition:
     - Ensure the bridging header is correctly set up in your project settings under `Build Settings` -> `Swift Compiler - General` -> `Objective-C Bridging Header`.
 
 
-
+### 2. Device Information Collection Tool
+https://github.com/nst/BatteryChart
