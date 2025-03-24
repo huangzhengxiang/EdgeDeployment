@@ -426,6 +426,39 @@ In this post I want to show you how easy it is to build CUDA applications using 
 
 
 
+### 9. Symbol Visibility
+Symbol visibility is set to determinate whether a symbol is visible from outside the library.
+
+#### 9.1 Motivation (War Story)
+An example is that `mllm` directly copied code from `llama.cpp`, and the symbols conflict each other. 
+
+#### 9.2 set to hidden
+If set to hidden, all symbols are set to hidden except otherwise is specified.
+```cmake
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -fvisibility=hidden")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
+set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} -fvisibility=hidden")
+```
+
+To specify the symbol to be exported, refer to definition of `MNN_PUBLIC`.
+
+```cpp
+#if defined(_MSC_VER)
+#if defined(BUILDING_MNN_DLL)
+#define MNN_PUBLIC __declspec(dllexport)
+#elif defined(USING_MNN_DLL)
+#define MNN_PUBLIC __declspec(dllimport)
+#else
+#define MNN_PUBLIC
+#endif
+#else
+#define MNN_PUBLIC __attribute__((visibility("default")))
+#endif
+```
+
+`__attribute__((visibility("default")))` is how to explicitly export a symbol.
+
+
 ### 9. Exercises and Examples
 
 
