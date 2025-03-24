@@ -45,7 +45,7 @@ Third, the `Info.plist` file is also necessary:
 set_target_properties(MNN PROPERTIES MACOSX_FRAMEWORK_INFO_PLIST ${CMAKE_CURRENT_LIST_DIR}/../MNN/project/ios/MNN/Info.plist)
 ```
 
-#### 1.4 
+#### 1.4 headers
 Finally, set headers' paths inside the framework:
 ```cmake
 SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_LIST_DIR}/include/llm_wrapper.h PROPERTIES MACOSX_PACKAGE_LOCATION Headers/)
