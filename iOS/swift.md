@@ -1,3 +1,17 @@
 ## Swift Guide
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language
 
+### UI
+The UI object can only be modified in the main actor task, if trying to modified elsewhere, a decorator is needed. Please specify `@MainActor`.
+```swift
+    Task { @MainActor in
+        let prefillStartTime = CFAbsoluteTimeGetCurrent()
+        llm?.forward(Int32(prefill_len), is_prefill: true, is_first_prefill: true)
+        let prefillEndTime = CFAbsoluteTimeGetCurrent()
+        let decodeStartTime = CFAbsoluteTimeGetCurrent()
+        llm?.forward(Int32(decode_len), is_prefill: false, is_first_prefill: false)
+        let decodeEndTime = CFAbsoluteTimeGetCurrent()
+        llm?.reset()
+        callback();
+    }
+```
