@@ -1,5 +1,7 @@
-## Swift Guide
+## Swift
 https://docs.swift.org/swift-book/documentation/the-swift-programming-language
+
+iOS recommended programming language
 
 ### UI
 The UI object can only be modified in the main actor task, if trying to modified elsewhere, a decorator is needed. Please specify `@MainActor`.
