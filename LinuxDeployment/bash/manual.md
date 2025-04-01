@@ -142,3 +142,8 @@ find ./ -name libc++_shared.so
 # in the format of
 find ${search-dir} -name ${search-file}
 ```
+
+### 9. file system operations
+
+#### 9.1 mkdir
+you can create a directory only if it doesn't already exist using the `mkdir` command with the `-p` option. The `-p` flag ensures that mkdir will not throw an error if the directory already exists.
