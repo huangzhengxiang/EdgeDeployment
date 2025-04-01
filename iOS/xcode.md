@@ -25,3 +25,21 @@
 
 3. Include Headers
     If Objective-C++ files include the framework headers, the framework root shall be added to `Build Settings` -> `Header Search Paths`.
+
+
+### 2. Energy Monitor
+(diagnose靠谱点)
+iOS 18 may encounter Zero Energy: https://github.com/doronz88/pymobiledevice3/issues/1146#issuecomment-2753655815  (reset DeveloperModeand restart the phone resolves this)
+
+1. 使用Xcode中Energy Impact直接读取，问题是仅有可视界面
+2. 使用pymobiledevice3，利用与Xcode类似的方法读取瞬时功耗，估算总功耗（2s更新一次），此方法与Xcode读数相同；另外可以用diagnostics读取电量的状态量，则与sysdiagnose相同（20s更新一次）。 https://github.com/doronz88/pymobiledevice3/tree/master
+ ```zsh
+ # get instaneous energy amount for pid1 and pid2
+ pymobiledevice3 developer dvt energy <pid1> <pid2>
+ # monitor/get once battery
+ pymobiledevice3 diagnostics battery monitor
+ pymobiledevice3 diagnostics battery single
+ ```
+    pymobiledevice3 forum: https://discord.com/channels/1133265168051208214/1133265168730701897
+1. 使用Apple Sysdiagnose，可以每20秒监控一次手机的电量变化（单位mAh），如此，只需要每分钟内至多进行一次原子测试即可成功。https://it-training.apple.com/tutorials/support/sup075/
+    (把文件AirDrop到mac——目标端需要将所有人可见性打开；然后通过sqlite  https://sqlitebrowser.org/dl/ 然后Open Database打开解压后压缩包中logs/powerlogs/*.PLSQL的数据库；查看PLBatteryAgent_EventBackward_Battery表中AppleRawCurrentCapacity与AppleRawMaxCapacity两项即可。注意最终测试结果的timestamp要对齐。)
