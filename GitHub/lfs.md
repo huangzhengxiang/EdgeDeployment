@@ -25,7 +25,10 @@ https://medium.com/junior-dev/how-to-use-git-lfs-large-file-storage-to-push-larg
 git lfs install
 git lfs track [your-large-files]
 # remove your ignore line in .gitignore
+# the rest is similar to a regular commit
 git add .
+git commit -m 'Adding large files'
+git push origin main:main
 ```
 
 ### deactivate

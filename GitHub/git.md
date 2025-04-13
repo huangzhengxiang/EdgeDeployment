@@ -132,3 +132,28 @@ For example, a branch called `HEAD` is accidentally created, the only way to res
 ```bash
 git branch -m HEAD tmp
 ```
+
+### 5. reset
+Sometimes when we want to   
+- **remove previous commit**, or   
+- **(dangerously) reset our local repo to some previous version**,  
+
+using `reset` would come in quite handy.
+#### 5.1 soft reset
+To clear our commit to some previous version, type in the command
+```bash
+git reset --soft <SHA of the previous commit>
+```
+You can look up the SHA of the previous commit by clicking the `n commits ahead of ...` link in the following figure
+![](./Screenshot%20from%202025-04-13%2012-54-04.png)
+You can then copy the desired commit SHA in the following page
+![](./Screenshot%20from%202025-04-13%2012-52-10.png)
+
+**NOTE**: `git reset --soft` will only clear your commit history without throwing away all the uncommited changes in your local repo, if somehow, the latter is your actual need, use hard reset described in the following section.
+#### 5.2 hard reset
+To hard reset your local repo, just modify `--soft` to `--hard` in the previous section
+```bash
+git reset --hard <SHA of the previous commit>
+```
+### commit
+One thing to note about the simple command `git commit` is that, if previous commit(s) failed(e.g. forget to use `git lfs` to commit large files), the failure **will not be removed in future commits** unless you have removed your previous failed commits. This is because `git commit` will try to commit all the uncommited files in the local commit history.
