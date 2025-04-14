@@ -52,3 +52,8 @@ SET_SOURCE_FILES_PROPERTIES(${CMAKE_CURRENT_LIST_DIR}/include/llm_wrapper.h PROP
 ```
 
 They will be referred to by including `mnn_wrapper/llm_wrapper.h` in objc files.
+
+#### 1.5 set toolchain and target version
+Get toolchain from https://github.com/cristeab/ios-cmake.git, which is a fork of https://code.google.com/p/ios-cmake/. Which in turn is based off of the Platform/Darwin.cmake and Platform/UnixPaths.cmake files which are included with CMake 2.8.4 (just as what MNN does)
+
+Specify the development target by `-DDEPLOYMENT_TARGET=16.4` when cmake.
