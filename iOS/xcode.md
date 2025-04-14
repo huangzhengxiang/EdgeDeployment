@@ -20,12 +20,15 @@
 
     Add the framework parent path to `Build Settings` -> `Framework Search Paths`.
 
-2. Bundle framework
-    Add the framework to `Build Phase` -> `Copy Bundle Resources`, so that the native framework can be bundled into the app. (Other assets are also needed to be bundled in this way.)
+2. Copy Bundle framework & Embed Framework
+    Add the framework to `Build Phase` -> `Copy Bundle Resources`, so that the native framework can be bundled into the app. (Other assets are also needed to be bundled in this way.) (Select `Copy items if needed`)
 
 3. Include Headers
     If Objective-C++ files include the framework headers, the framework root shall be added to `Build Settings` -> `Header Search Paths`.
 
+4. Link Binary
+    Add framework to `Build Phase` -> `Link Binary with Libraries`.
+    (Select the added framework, no need to add again.)
 
 ### 2. Energy Monitor
 (diagnose靠谱点)
