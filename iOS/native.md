@@ -56,3 +56,6 @@ They will be referred to by including `mnn_wrapper/llm_wrapper.h` in objc files.
 Get toolchain from https://github.com/cristeab/ios-cmake.git, which is a fork of https://code.google.com/p/ios-cmake/. Which in turn is based off of the Platform/Darwin.cmake and Platform/UnixPaths.cmake files which are included with CMake 2.8.4 (just as what MNN does)
 
 Specify the development target by `-DDEPLOYMENT_TARGET=16.4` when cmake.
+
+### 2. dylib build
+Another library candidate is dylib, which is another way to build library. Shared objects are default to be built as dylib.
