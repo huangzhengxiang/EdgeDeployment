@@ -17,3 +17,14 @@ The UI object can only be modified in the main actor task, if trying to modified
         callback();
     }
 ```
+
+### time measurement
+
+Apple sysdiagnose timestamp vs swift `CFAbsoluteTime`.
+
+sysdiagnose timestamp is `timeIntervalSince1970`, while `CFAbsoluteTime` is something like `timeIntervalSince2001`, differing by 978,307,200 seconds.
+
+```swift
+var swift2sysdiagnose = 978307200.0
+startTime += swift2diagnose // convert to starting from 1970.
+```

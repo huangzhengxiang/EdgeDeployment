@@ -1,0 +1,2 @@
+pyjson
+pymobiledevices3
