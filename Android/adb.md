@@ -53,3 +53,28 @@ https://developer.android.com/ndk/downloads
 ```bash
 adb install /path/to/apk
 ```
+
+### adb over WLAN
+When PC and phone are connected to the same WLAN, adb can be connected over the WLAN. Enable `Wireless Debuggging`(无线调试) or anything similar in `Settings`(设置) on phone.
+
+1. adb pair
+Find the pairing number(配对码) on phone and the pairing IP and port. 
+
+Execute `adb pair` on PC.
+
+```bash
+adb pair <ip>:<port>
+```
+
+and then enter the pairing code.
+
+2. adb connect
+After pairing, the PC is allowed to be connected to the phone. Find the connection IP and port on phone. This port is usually different from the previous pairing port, though the IP is usually the same.
+
+Execute `adb connect` on PC.
+
+```bash
+adb connect <ip>:<port>
+```
+
+and then adb is ready to be used.

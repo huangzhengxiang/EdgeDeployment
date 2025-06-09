@@ -44,6 +44,7 @@ Q
 
 R
 - Renesas Board QSG + fsp package -> `Renesas`
+- Rust Language Development -> `Rust`
 
 S
 - STM32 Board QSG -> `STM32`

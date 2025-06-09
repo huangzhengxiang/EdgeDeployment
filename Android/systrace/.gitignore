@@ -1,1 +1,3 @@
 data/
+record_android_trace
+*.perfetto-trace
