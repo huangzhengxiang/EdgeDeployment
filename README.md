@@ -35,6 +35,7 @@ L
 M
 - Reference to MNN repository -> `MNN`.
 - macOS development -> `macOS`
+- Plotting with matplotlib -> `matplotlib`.
 
 N
 - Nvidia Board Quick Start Guide -> `Nvidia`
