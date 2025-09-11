@@ -22,6 +22,15 @@ sudo ufw allow <VPS-proxy-port>/tcp
 sudo ufw reload
 ```
 
+Make Sure the Port is on
+```bash
+ss -tlnp | grep <VPS-proxy-port>
+```
+
+If you see `127.0.0.1:<VPS-proxy-port>` → refuse connection.
+
+If `0.0.0.0:<VPS-proxy-port>` → accept
+
 ### 3. Allow SSH Forwarding on Server
 First, ensure the following options are set in /etc/ssh/sshd_config:
 ```
@@ -35,15 +44,6 @@ sudo systemctl restart ssh
 ```
 
 Now ssh forwading is enabled, which means reverse tunnel is available on open port now.
-
-3. Make Sure the Port is on
-```bash
-ss -tlnp | grep <VPS-proxy-port>
-```
-
-If you see `127.0.0.1:<VPS-proxy-port>` → refuse connection.
-
-If `0.0.0.0:<VPS-proxy-port>` → accept
 
 ## Device End
 
