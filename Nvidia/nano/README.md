@@ -325,3 +325,88 @@ pip3 install keras_preprocessing==1.1.2 keras_applications==1.0.8 keras==2.7.0
 # install tensorflow
 pip3 install -U --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v461 tensorflow==2.7.0+nv22.01
 ```
+
+## 12. Power Control
+https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/text/SD/PlatformPowerAndPerformance/JetsonXavierNxSeriesAndJetsonAgxXavierSeries.html#power-mode-controls
+
+There are many power modes in Jetson developer modes.
+
+This command can self-define a proper power mode.
+```bash
+sudo vim /etc/nvpmodel.config
+```
+
+After defining 1 power mode, you can switch to it through:
+```bash
+sudo nvpmodel -m <mode-id>
+```
+Switching through them can adjust CPU, GPU, DDR(EMC) max frequencies and enable and disable CPU cores and GPU TPC (GPU Textual Processor Cluster Number). Control `TPC_PG_MASK` needs reboot to take effect.
+
+For example:
+```
+< POWER_MODEL ID=1 NAME=MODE_15W >
+CPU_ONLINE CORE_0 1
+CPU_ONLINE CORE_1 1
+CPU_ONLINE CORE_2 1
+CPU_ONLINE CORE_3 1
+CPU_ONLINE CORE_4 0
+CPU_ONLINE CORE_5 0
+CPU_ONLINE CORE_6 0
+CPU_ONLINE CORE_7 0
+CPU_ONLINE CORE_8 0
+CPU_ONLINE CORE_9 0
+CPU_ONLINE CORE_10 0
+CPU_ONLINE CORE_11 0
+TPC_POWER_GATING TPC_PG_MASK 248
+GPU_POWER_CONTROL_ENABLE GPU_PWR_CNTL_EN on
+CPU_A78_0 MIN_FREQ 729600
+CPU_A78_0 MAX_FREQ 1113600
+GPU MIN_FREQ 0
+GPU MAX_FREQ 408000000
+GPU_POWER_CONTROL_DISABLE GPU_PWR_CNTL_DIS auto
+EMC MAX_FREQ 2133000000
+DLA0_CORE MAX_FREQ 614400000
+DLA1_CORE MAX_FREQ 614400000
+DLA0_FALCON MAX_FREQ 294400000
+DLA1_FALCON MAX_FREQ 294400000
+PVA0_VPS MAX_FREQ 307200000
+PVA0_AXI MAX_FREQ 217600000
+
+< POWER_MODEL ID=2 NAME=MODE_30W >
+CPU_ONLINE CORE_0 1
+CPU_ONLINE CORE_1 1
+CPU_ONLINE CORE_2 1
+CPU_ONLINE CORE_3 1
+CPU_ONLINE CORE_4 1
+CPU_ONLINE CORE_5 1
+CPU_ONLINE CORE_6 1
+CPU_ONLINE CORE_7 1
+CPU_ONLINE CORE_8 0
+CPU_ONLINE CORE_9 0
+CPU_ONLINE CORE_10 0
+CPU_ONLINE CORE_11 0
+TPC_POWER_GATING TPC_PG_MASK 240
+GPU_POWER_CONTROL_ENABLE GPU_PWR_CNTL_EN on
+CPU_A78_0 MIN_FREQ 729600
+CPU_A78_0 MAX_FREQ 1728000
+CPU_A78_1 MIN_FREQ 729600
+CPU_A78_1 MAX_FREQ 1728000
+GPU MIN_FREQ 0
+GPU MAX_FREQ 612000000
+GPU_POWER_CONTROL_DISABLE GPU_PWR_CNTL_DIS auto
+EMC MAX_FREQ -1
+DLA0_CORE MAX_FREQ 1369600000
+DLA1_CORE MAX_FREQ 1369600000
+DLA0_FALCON MAX_FREQ 729600000
+DLA1_FALCON MAX_FREQ 729600000
+PVA0_VPS MAX_FREQ 512000000
+PVA0_AXI MAX_FREQ 358400000
+```
+
+TPC_PG_MASK:
+252 (11111100) -> 2;
+248 (11111000) -> 3; 
+240 (11110000) -> 4;
+0   (00000000) -> 0;
+
+(The number shows an negative enabled logic)
