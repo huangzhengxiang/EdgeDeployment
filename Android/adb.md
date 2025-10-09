@@ -45,14 +45,39 @@ top -s 9
 top -d 1 -s 6
 ~~~
 
-### 6. Android NDK for Compilation
+### 6. Get Android NDK for Compilation
 https://developer.android.com/ndk/downloads
+Set the downloaded ndk by $ANDROID_NDK
+```bash
+export ANDROID_NDK=
+cmake ../../ -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="arm64-v8a" -DANDROID_STL=c++_static -DANDROID_NATIVE_API_LEVEL=android-28 -DNATIVE_LIBRARY_OUTPUT=. -DNATIVE_INCLUDE_OUTPUT=.
+```
+For compilation, CMAKE_TOOLCHAIN_FILE, ANDROID_STL, and ANDROID_NATIVE_API_LEVEL must be set based on the phone architecture.
 
-### 7. apk installation
+### 7. push and pull
+
+```bash
+adb push <pc-src-path> <phone-dst-path>
+adb pull <phone-src-path> <pc-dst-path>
+```
+
+### 8. apk installation
 
 ```bash
 adb install /path/to/apk
 ```
+
+### 9. see logcat in terminal
+
+```bash
+adb logcat
+```
+
+grep your specific app/program name.
+```bash
+adb logcat | grep MNN
+```
+
 
 ### adb over WLAN
 When PC and phone are connected to the same WLAN, adb can be connected over the WLAN. Enable `Wireless Debuggging`(无线调试) or anything similar in `Settings`(设置) on phone.
