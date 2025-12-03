@@ -1,4 +1,4 @@
-## Android
+## Android App
 
 ### 0. Guide
 https://developer.android.com/guide
@@ -307,3 +307,74 @@ public class MainActivity extends AppCompatActivity {
 ### 10. Wrap data files into app
 * Access file by Resource ID: put it under `src/main/res/raw`.
 * Access file by original path/name: put it under `src/main/assets`.
+
+### 11. Wrap pre-built libraries into app
+1. Write `copy` commands in your `CMakeLists.txt` or `build.gradle`, so that the libraries are available under `src/main/jni/libs/arm64-v8a` or any jniLib path specified.
+This path can be referred to as `getApplicationInfo().nativeLibraryDir`.
+2. All the libraries under the path can be automatically linked by linke. However, if your lib is to be accessed by `dlopen`, it can't be punched. Add 
+```gradle
+    packagingOptions {
+        jniLibs.useLegacyPackaging = true
+    }
+```
+after `externalNativeBuild`, so that it won't be compressed.
+3. System libraries
+In `AndroidManifest.xml`, you may specify to link system native libraries such as OpenCL. If `android:required="true"`, the app crashed if the lib is not available.
+```xml
+<uses-native-library
+   android:name="libOpenCL.so"
+   android:required="true" />
+<uses-native-library android:name="libOpenCL-car.so" android:required="false"/>
+<uses-native-library android:name="libOpenCL-pixel.so" android:required="false"/>
+<uses-library
+   android:name="libcdsprpc.so"
+   android:required="false"/>
+```
+4. Conflicts
+System libraries may conflict with your own libraries if they are the same name, such as `libQnnHtpV79Skel.so`. To avoid the conflicts, specifically Qualcomm SDK looks into `${ADSP_LIBRARY_PATH}` for these libraries runtime. Set the environment variables can resolve this.
+
+```java
+Os.setenv("ADSP_LIBRARY_PATH", getApplicationInfo().nativeLibraryDir, true);
+```
+
+### 12. redirect std cout and cerr to logcat
+Your code may not target Android initially, std cout and cerr are no where to be found if you don't redirect them.
+```cpp
+class LogcatBuffer : public std::streambuf {
+    std::string buffer;
+
+protected:
+    int overflow(int c) override {
+        if (c == '\n') {
+            __android_log_print(ANDROID_LOG_INFO, "CPP", "%s", buffer.c_str());
+            buffer.clear();
+        } else if (c != EOF) {
+            buffer.push_back(c);
+        }
+        return c;
+    }
+
+    int sync() override {
+        if (!buffer.empty()) {
+            __android_log_print(ANDROID_LOG_INFO, "CPP", "%s", buffer.c_str());
+            buffer.clear();
+        }
+        return 0;
+    }
+};
+
+static LogcatBuffer logcat_buffer;
+
+void redirectStdToLogcat() {
+    std::cout.rdbuf(&logcat_buffer);
+    std::cerr.rdbuf(&logcat_buffer);
+}
+
+JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved) {
+    redirectStdToLogcat();
+    __android_log_print(ANDROID_LOG_INFO, "MNN_DEBUG", "JNI_OnLoad");
+    return JNI_VERSION_1_4;
+}
+```
+
+The overrode `overflow` and `sync` functions helps the buffer to know the `flush` behaviour (i.e., to `__android_log_print`).
