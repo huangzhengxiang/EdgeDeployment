@@ -135,7 +135,47 @@ When cmake, ensure that it can find pybind11. If you install it by python in vir
 cmake -Dpybind11_DIR=$(python -m pybind11 --cmakedir) ..
 ```
 
-#### 2.2 Wrap up -> .whl
+#### 2.2 PyTorch Interface
+First, pybind11 and Torch paths shall be found. Use `python -m pybind11 --cmakedir` command to locate pybind11 path, and `python -c "import torch; print(torch.utils.cmake_prefix_path)"` and append which to `CMAKE_PREFIX_PATH`, so that `torch` would be available.
+Note that `find_package(Python COMPONENTS Interpreter Development REQUIRED)` is needed for latest version of `pybind11`.
+
+Then, note that to use PyTorch interface, `TORCH_PYTHON_LIBRARY` is also needed. [https://github.com/pytorch/pytorch/issues/108041#issuecomment-1753895665](https://github.com/pytorch/pytorch/issues/108041#issuecomment-1753895665).
+We need to `find_library(TORCH_PYTHON_LIBRARY torch_python PATH "${TORCH_INSTALL_PREFIX}/lib")` and link it.
+
+Finally, you add module, e.g., `pybind11_add_module(pylmstore ${CMAKE_CURRENT_LIST_DIR}/src/pybind/pybind.cpp)`. 
+
+Put them together:
+```python
+if (PYBIND) 
+    execute_process(
+        COMMAND python -m pybind11 --cmakedir
+        OUTPUT_VARIABLE pybind11_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    execute_process(
+        COMMAND python -c "import torch; print(torch.utils.cmake_prefix_path)"
+        OUTPUT_VARIABLE Torch_DIR
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+
+    list(APPEND CMAKE_PREFIX_PATH ${Torch_DIR})
+    find_package(Torch REQUIRED)
+    find_library(TORCH_PYTHON_LIBRARY torch_python PATH "${TORCH_INSTALL_PREFIX}/lib")
+    find_package(pybind11 REQUIRED)
+    find_package(Python COMPONENTS Interpreter Development REQUIRED)
+
+    add_definitions(-DNEED_PYBIND)
+    if(pybind11_FOUND)
+        pybind11_add_module(pylmstore ${CMAKE_CURRENT_LIST_DIR}/src/pybind/pybind.cpp)
+        target_link_libraries(pylmstore PRIVATE LMStore ${TORCH_LIBRARIES} ${TORCH_PYTHON_LIBRARY})
+        target_include_directories(pylmstore PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/
+                                                     ${TORCH_INCLUDE_DIRS})
+        target_compile_definitions(pylmstore PRIVATE _GLIBCXX_USE_CXX11_ABI=1)
+    endif()
+endif()
+```
+
+#### 2.3 Wrap up -> .whl
 whl is only for release version ready for distribution. 
 
 After cmake compilation: `pymicronn.cpython-310-x86_64-linux-gnu.so`. This is already a valid Python module. You can do: `import pymicronn`, as long as Python can see the file. This is how CPython itself works internally.
